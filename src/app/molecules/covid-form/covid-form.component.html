@@ -1,0 +1,50 @@
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="documentTypeForm" [optional]="isOptional">
+        <form [formGroup]="documentTypeForm">
+            <ng-template matStepLabel>Tipo de documento</ng-template>
+            <div>
+                <mat-form-field>
+                    <mat-label>Tipo de documento</mat-label>
+                    <select formControlName="documentType" matNativeControl required>
+                      <option value="cc">Cédula de ciudadania</option>
+                      <option value="ti">Tarjeta de identidad</option>
+                      <option value="ce">Cédula de extrangería</option>
+                    </select>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-button matStepperNext>Siguiente</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="documentNumberForm" [optional]="isOptional">
+        <form [formGroup]="documentNumberForm">
+            <ng-template matStepLabel>Documento de identidad</ng-template>
+            <div>
+                <mat-form-field>
+                    <mat-label>Número de documento</mat-label>
+                    <input matInput required
+                        type="number"
+                        placeholder="1234567"
+                        formControlName="documentNumber">
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-button matStepperNext>Siguiente</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="temperatureForm">
+        <form [formGroup]="temperatureForm">
+            <ng-template matStepLabel>Temperatura</ng-template>
+            <mat-form-field>
+                <input matInput required
+                    formControlName="temperature">
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Atrás</button>
+                <button mat-button (click)="registerData()">Registrar</button>
+            </div>
+        </form>
+    </mat-step>
+</mat-vertical-stepper>

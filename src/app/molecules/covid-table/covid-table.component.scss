@@ -1,0 +1,20 @@
+.container {
+    font-family: monospace;
+    display: flex;
+    margin: 2rem;
+
+    .table-container {
+        .title {
+            font-size: 1.4rem;
+        }
+
+        table {
+            width: 100%;
+        }
+    }
+
+    .graph-container {
+        width: 50%;
+        margin-top: 5rem;
+    }
+}
