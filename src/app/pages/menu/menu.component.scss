@@ -7,6 +7,20 @@
     left: 0;
     right: 0;
 
+    .title {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .subtitle {
+        font-family: cursive;
+    }
+
+    .icon-content {
+        margin-left: .5rem;
+        width: 70px;
+    }
+
     .is-mobile .toolbar {
         position: fixed;
         z-index: 2;

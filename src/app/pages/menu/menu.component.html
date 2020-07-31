@@ -1,12 +1,13 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches">
     <mat-toolbar color="primary" class="toolbar">
       <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-      <h1 class="title">Geta Club</h1>
+      <img class="icon-content" src="../../../assets/icons/2785819.png" alt="covid-icon"/>
+      <h1 class="title">Test de covid 19 - <span class="subtitle">by Geta Club</span></h1>
     </mat-toolbar>
   
     <mat-sidenav-container class="sidenav-container">
       <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="100">
         <mat-action-list>
             <a mat-list-item routerLink="form">
                 <span>Test de covid 19</span>

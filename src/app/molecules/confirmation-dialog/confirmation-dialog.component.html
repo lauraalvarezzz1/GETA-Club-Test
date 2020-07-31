@@ -1,0 +1,19 @@
+<div class="message-popup" >
+    <p *ngIf="data">{{data}}</p>
+    <p *ngIf="!data">¡Registro añadido con éxito!</p>
+
+    <div class="buttons">
+        <button mat-raised-button
+            class="button-container"
+            color= "warn"
+            (click)="closeForm()">
+            Registrar nuevo
+        </button>
+        <button mat-raised-button
+            class="button-container"
+            color= "primary"
+            (click)="goToRegisters()">
+            Ver Registros
+        </button>
+    </div>
+</div>

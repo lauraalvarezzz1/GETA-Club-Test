@@ -1,0 +1,47 @@
+@import '~@angular/material/theming';
+
+.mat-toolbar {
+    &.mat-toolbar-row,
+    &.mat-toolbar-single-row {
+        height: 100px;
+    }
+
+    &.mat-primary {
+        background: #1d1f22; 
+    }
+}
+
+.mat-drawer-content.mat-sidenav-content {
+    background-image: linear-gradient(to bottom, #ee8c46, #4404d3);
+}
+
+.mat-sidenav {
+    .mat-drawer-inner-container {
+        width: 200px;
+    }
+}
+
+.mat-drawer.mat-drawer-side, .mat-drawer  {
+    background-color: #1d1f22;
+}
+
+.mat-list-item-content {
+    color: white;
+}
+
+.mat-list-item {
+    text-decoration: none;
+}
+
+.mat-stepper-vertical {
+    background: transparent;
+}
+
+.mat-step-header .mat-step-label {
+    font-size: 25px;
+}
+
+.mat-error,
+.mat-form-field .mat-select.mat-select-invalid .mat-select-arrow {
+    color: bisque;
+}

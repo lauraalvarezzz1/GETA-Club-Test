@@ -1,50 +1,88 @@
-<mat-vertical-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="documentTypeForm" [optional]="isOptional">
-        <form [formGroup]="documentTypeForm">
-            <ng-template matStepLabel>Tipo de documento</ng-template>
-            <div>
-                <mat-form-field>
-                    <mat-label>Tipo de documento</mat-label>
-                    <select formControlName="documentType" matNativeControl required>
-                      <option value="cc">Cédula de ciudadania</option>
-                      <option value="ti">Tarjeta de identidad</option>
-                      <option value="ce">Cédula de extrangería</option>
-                    </select>
-                </mat-form-field>
-            </div>
-            <div>
-                <button mat-button matStepperNext>Siguiente</button>
-            </div>
-        </form>
-    </mat-step>
-    <mat-step [stepControl]="documentNumberForm" [optional]="isOptional">
-        <form [formGroup]="documentNumberForm">
-            <ng-template matStepLabel>Documento de identidad</ng-template>
-            <div>
-                <mat-form-field>
-                    <mat-label>Número de documento</mat-label>
+<div class="main-view" *ngIf="mainView">
+    <p class="main-title">TEST DE </p>
+    <img class="covid-icon" src="../../../assets/icons/2785819.png" alt="covid-icon"/>
+    <button 
+        mat-raised-button
+        (click)="startTest()">
+        Comenzar
+    </button>
+</div>
+<div class="container" *ngIf="!mainView">
+    <mat-vertical-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="documentTypeForm" [optional]="isOptional">
+            <ng-template matStepLabel>Seleccionar tipo de documento</ng-template>
+            <form [formGroup]="documentTypeForm">
+                <div>
+                    <mat-form-field class="formfield-container">
+                        <mat-select formControlName="documentType" matNativeControl required>
+                          <mat-option value="cc">Cédula de ciudadania</mat-option>
+                          <mat-option value="ti">Tarjeta de identidad</mat-option>
+                          <mat-option value="ce">Cédula de extrangería</mat-option>
+                        </mat-select>
+                        <mat-error>Por favor seleccione el tipo de documento.</mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button 
+                        class="button-container"
+                        color= "primary"
+                        mat-raised-button 
+                        matStepperNext
+                        [disabled]="documentTypeForm.invalid">
+                        Siguiente
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="documentNumberForm" [optional]="isOptional">
+            <form [formGroup]="documentNumberForm">
+                <ng-template matStepLabel>Digite su documento de identidad</ng-template>
+                <div>
+                    <mat-form-field class="formfield-container">
+                        <input matInput required
+                            autocomplete="off" 
+                            type="number"
+                            formControlName="documentNumber">
+                            <mat-error>Por favor introduzca su documento de identidad.</mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button 
+                        class="button-container"
+                        color="primary"
+                        mat-raised-button 
+                        matStepperNext
+                        [disabled]="documentNumberForm.invalid">
+                        Siguiente
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="temperatureForm">
+            <form [formGroup]="temperatureForm">
+                <ng-template matStepLabel>Temperatura</ng-template>
+                <mat-form-field class="formfield-container">
                     <input matInput required
+                        autocomplete="off"
                         type="number"
-                        placeholder="1234567"
-                        formControlName="documentNumber">
+                        formControlName="temperature">
+                    <mat-error>Por favor introduzca la temperatura. Ejemplo: 25</mat-error>
                 </mat-form-field>
-            </div>
-            <div>
-                <button mat-button matStepperNext>Siguiente</button>
-            </div>
-        </form>
-    </mat-step>
-    <mat-step [stepControl]="temperatureForm">
-        <form [formGroup]="temperatureForm">
-            <ng-template matStepLabel>Temperatura</ng-template>
-            <mat-form-field>
-                <input matInput required
-                    formControlName="temperature">
-            </mat-form-field>
-            <div>
-                <button mat-button matStepperPrevious>Atrás</button>
-                <button mat-button (click)="registerData()">Registrar</button>
-            </div>
-        </form>
-    </mat-step>
-</mat-vertical-stepper>
+                <div>
+                    <button class="back button-container"
+                        mat-raised-button
+                        color= "warn"
+                        matStepperPrevious>Atrás</button>
+                    <button 
+                        class="button-container"
+                        mat-raised-button 
+                        color= "primary"
+                        [disabled]="temperatureForm.invalid"
+                        (click)="registerData()">
+                        Registrar
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+    </mat-vertical-stepper>
+</div>

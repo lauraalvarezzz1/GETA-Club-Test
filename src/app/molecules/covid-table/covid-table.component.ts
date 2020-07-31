@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserModel } from 'src/app/model/user.model';
 import { ChartOptions, ChartType } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { Label, Color } from 'ng2-charts';
+import { Router } from '@angular/router';
 
 
 export interface PeriodicElement {
@@ -19,6 +20,7 @@ export interface PeriodicElement {
 export class CovidTableComponent implements OnInit {
   displayedColumns: string[] = ['documentType', 'documentNumber', 'temperature'];
   dataSource: UserModel[];
+  dataSourceTwo: UserModel[];
   filterPerTemperature: [];
   lowTemperature: number = 0;
   hightTemperature: number = 0;
@@ -40,27 +42,42 @@ export class CovidTableComponent implements OnInit {
   pieChartLabels: Label[] = ['Temperatura por debajo de 37 grados', 'Temperatura por encima de 37 grados'];
   pieChartData: number[];
   pieChartType: ChartType = 'pie';
-  pieChartLegend = true;
   pieChartColors = [
     {
-      backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
+      backgroundColor: ['rgba(255,5,0,0.3)', 'rgba(4,255,0,0.3)'],
     },
   ];
+  doughnutChartColor: Color[] = [
+    { backgroundColor: 'black' },
+    { backgroundColor: 'black' },
+  ];
   
-  constructor() { }
+  constructor(public route: Router) { }
 
   ngOnInit() {
     this.filterPerTemperature = JSON.parse(localStorage.getItem('users'));
 
-    this.dataSource = this.filterPerTemperature.filter((item: UserModel) => {
-      if(item.temperature > 37) {
-        this.hightTemperature = this.hightTemperature + 1;
-        return item;
-      } else {
-        this.lowTemperature = this.lowTemperature + 1;
-      }
-    });
-    this.pieChartData = [this.lowTemperature, this.hightTemperature];
+    if(this.filterPerTemperature) {
+      this.dataSource = this.filterPerTemperature.filter((item: UserModel) => {
+        if(item.temperature > 37) {
+          this.hightTemperature = this.hightTemperature + 1;
+          return item;
+        } else {
+          this.lowTemperature = this.lowTemperature + 1;
+        }
+      });
+  
+      this.dataSourceTwo = this.filterPerTemperature.filter((item: UserModel) => {
+        if(item.temperature < 37) {
+          return item;
+        }
+      });
+      this.pieChartData = [this.lowTemperature, this.hightTemperature];
+    }
+  }
+
+  goToForm() {
+    this.route.navigateByUrl("/dashboard/form");
   }
 
 }
